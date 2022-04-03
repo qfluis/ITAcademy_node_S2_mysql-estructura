@@ -24,10 +24,3 @@ ON pr.idproveedor = m.proveedores_idproveedor INNER JOIN gafas g
 ON m.idmarca = g.marcas_idmarca INNER JOIN `lineas-pedido` lp
 ON g.idgafas = lp.gafas_idgafas
 GROUP BY pr.nombre
-
-
--- CONSULTAS PIZZERIA
-
--- 1. Llista quants productes del tipus 'begudes' s'han venut en una determinada localitat
-
--- 2. Llista quantes comandes ha efectuat un determinat empleat
