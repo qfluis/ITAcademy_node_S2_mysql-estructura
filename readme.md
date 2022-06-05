@@ -3,6 +3,8 @@ Repo que contiene los ejercicios correspondientes a la entrega 2.1. Cada carpeta
 - **.PNG**: contienen el diagrama ER de la BD.
 - **.SQL**: pueden contener estructura de la BD, datos y consultas (se especifica en cada archivo).
 - **.MWB**: el fichero de Mysql Workbench con el modelo.
+## Importante
+Los scripts de creación de BD eliminan previamente cualquier BD que se llame igual.
 
 ## Nivel 1 Ejercicio 1 Optica
 Contiene *diagrama ER, estructura, datos y consultas*.

@@ -4,7 +4,7 @@ DROP SCHEMA IF EXISTS `youtube_aliexpress_BD` ;
 CREATE SCHEMA `youtube_aliexpress_BD` DEFAULT CHARACTER SET utf8mb4 ;
 USE `youtube_aliexpress_BD` ;
 
-CREATE TABLE IF NOT EXISTS `usuarios` (
+CREATE TABLE `usuarios` (
   `idusuario` INT NOT NULL AUTO_INCREMENT,
   `email` VARCHAR(60) NULL,
   `password` VARCHAR(45) NULL,
@@ -16,7 +16,7 @@ CREATE TABLE IF NOT EXISTS `usuarios` (
   PRIMARY KEY (`idusuario`)
 );
 
-CREATE TABLE IF NOT EXISTS `canales` (
+CREATE TABLE `canales` (
   `idcanal` INT NOT NULL AUTO_INCREMENT,
   `nombre` VARCHAR(45) NULL,
   `descripcion` VARCHAR(90) NULL,
@@ -28,7 +28,7 @@ CREATE TABLE IF NOT EXISTS `canales` (
     REFERENCES `usuarios` (`idusuario`)
 );
 
-CREATE TABLE IF NOT EXISTS `videos` (
+CREATE TABLE `videos` (
   `idvideo` INT NOT NULL AUTO_INCREMENT,
   `titulo` VARCHAR(60) NULL,
   `descripcion` VARCHAR(120) NULL,
@@ -52,13 +52,13 @@ CREATE TABLE IF NOT EXISTS `videos` (
     REFERENCES `canales` (`idcanal`)
 );
 
-CREATE TABLE IF NOT EXISTS `etiquetas` (
+CREATE TABLE `etiquetas` (
   `idetiqueta` INT NOT NULL AUTO_INCREMENT,
   `nombre` VARCHAR(45) NULL,
   PRIMARY KEY (`idetiqueta`)
 );
 
-CREATE TABLE IF NOT EXISTS `etiquetas_video` (
+CREATE TABLE `etiquetas_video` (
   `idetiqueta_video` INT NOT NULL AUTO_INCREMENT,
   `etiquetas_idetiqueta` INT NOT NULL,
   `videos_idvideo` INT NOT NULL,
@@ -71,7 +71,7 @@ CREATE TABLE IF NOT EXISTS `etiquetas_video` (
     REFERENCES `videos` (`idvideo`)
 );
 
-CREATE TABLE IF NOT EXISTS `subscripciones_canal` (
+CREATE TABLE `subscripciones_canal` (
   `subscripcion_canal` INT NOT NULL AUTO_INCREMENT,
   `canales_idcanal` INT NOT NULL,
   `usuarios_idusuario` INT NOT NULL,
@@ -84,7 +84,7 @@ CREATE TABLE IF NOT EXISTS `subscripciones_canal` (
     REFERENCES `usuarios` (`idusuario`)
 );
 
-CREATE TABLE IF NOT EXISTS `likes_dislikes` (
+CREATE TABLE `likes_dislikes` (
   `idlike_dislike` INT NOT NULL AUTO_INCREMENT,
   `tipo` ENUM('like', 'dislike') NULL,
   `fecha_like_dislike` TIMESTAMP NULL,
@@ -99,7 +99,7 @@ CREATE TABLE IF NOT EXISTS `likes_dislikes` (
     REFERENCES `videos` (`idvideo`)
 );
 
-CREATE TABLE IF NOT EXISTS `playlists` (
+CREATE TABLE `playlists` (
   `idplaylist` INT NOT NULL AUTO_INCREMENT,
   `nombre` VARCHAR(45) NULL,
   `fecha_creacion` TIMESTAMP NULL,
@@ -107,7 +107,7 @@ CREATE TABLE IF NOT EXISTS `playlists` (
   PRIMARY KEY (`idplaylist`)
 );
 
-CREATE TABLE IF NOT EXISTS `comentarios` (
+CREATE TABLE `comentarios` (
   `idcomentario` INT NOT NULL AUTO_INCREMENT,
   `texto` VARCHAR(120) NULL,
   `fecha_hora` TIMESTAMP NULL,
@@ -122,7 +122,7 @@ CREATE TABLE IF NOT EXISTS `comentarios` (
     REFERENCES `videos` (`idvideo`)
 );
 
-CREATE TABLE IF NOT EXISTS `likes_dislikes_comentarios` (
+CREATE TABLE `likes_dislikes_comentarios` (
   `idlike_dislike_comentario` INT NOT NULL AUTO_INCREMENT,
   `tipo` ENUM('like', 'dislike') NULL,
   `fecha` DATETIME NULL,
@@ -137,7 +137,7 @@ CREATE TABLE IF NOT EXISTS `likes_dislikes_comentarios` (
     REFERENCES `usuarios` (`idusuario`)
 );
 
-CREATE TABLE IF NOT EXISTS `items_playlist` (
+CREATE TABLE `items_playlist` (
   `iditem_playlist` INT NOT NULL AUTO_INCREMENT,
   `playlists_idplaylist` INT NOT NULL,
   `videos_idvideo` INT NOT NULL,
