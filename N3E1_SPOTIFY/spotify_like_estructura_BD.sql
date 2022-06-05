@@ -23,7 +23,6 @@ CREATE TABLE  `suscripciones` (
   `forma_pago` ENUM('tarjeta', 'PayPal') NULL,
   `usuarios_idusuario` INT NOT NULL,
   PRIMARY KEY (`idsuscripcion`),
-  -- INDEX `fk_suscripciones_usuarios1_idx` (`usuarios_idusuario` ASC) VISIBLE,
   CONSTRAINT `fk_suscripciones_usuarios1`
     FOREIGN KEY (`usuarios_idusuario`)
     REFERENCES `usuarios` (`idusuario`)
@@ -38,7 +37,6 @@ CREATE TABLE  `metodos_pago` (
   `usuario_paypal` VARCHAR(45) NULL,
   `usuarios_idusuario` INT NOT NULL,
   PRIMARY KEY (`idmetodopago`),
-  -- INDEX `fk_metodos_pago_usuarios_idx` (`usuarios_idusuario` ASC) VISIBLE,
   CONSTRAINT `fk_metodos_pago_usuarios`
     FOREIGN KEY (`usuarios_idusuario`)
     REFERENCES `usuarios` (`idusuario`)
@@ -53,9 +51,6 @@ CREATE TABLE  `pagos` (
   `metodos_pago_idmetodopago` INT NOT NULL,
   `suscripciones_idsuscripcion` INT NOT NULL,
   PRIMARY KEY (`numero_pedido`, `suscripciones_idsuscripcion`),
-  -- INDEX `fk_pagos_usuarios1_idx` (`usuarios_idusuario` ASC) VISIBLE,
-  -- INDEX `fk_pagos_metodos_pago1_idx` (`metodos_pago_idmetodopago` ASC) VISIBLE,
-  -- INDEX `fk_pagos_suscripciones1_idx` (`suscripciones_idsuscripcion` ASC) VISIBLE,
   CONSTRAINT `fk_pagos_usuarios1`
     FOREIGN KEY (`usuarios_idusuario`)
     REFERENCES `usuarios` (`idusuario`),
@@ -81,8 +76,6 @@ CREATE TABLE  `playlist_compartida` (
   `playlists_idplaylist` INT NOT NULL,
   `usuarios_idusuario` INT NOT NULL,
   PRIMARY KEY (`idplaylist_compartida`),
-  -- INDEX `fk_playlist_compartida_playlists1_idx` (`playlists_idplaylist` ASC) VISIBLE,
-  -- INDEX `fk_playlist_compartida_usuarios1_idx` (`usuarios_idusuario` ASC) VISIBLE,
   CONSTRAINT `fk_playlist_compartida_playlists1`
     FOREIGN KEY (`playlists_idplaylist`)
     REFERENCES `playlists` (`idplaylist`),
@@ -102,7 +95,6 @@ CREATE TABLE  `favs_albums` (
   `idfav_album` INT NOT NULL AUTO_INCREMENT,
   `usuarios_idusuario` INT NOT NULL,
   PRIMARY KEY (`idfav_album`),
-  -- INDEX `fk_favs_albums_usuarios1_idx` (`usuarios_idusuario` ASC) VISIBLE,
   CONSTRAINT `fk_favs_albums_usuarios1`
     FOREIGN KEY (`usuarios_idusuario`)
     REFERENCES `usuarios` (`idusuario`)
@@ -116,8 +108,6 @@ CREATE TABLE  `albums` (
   `artistas_idartista` INT NOT NULL,
   `favs_albums_idfav_album` INT NOT NULL,
   PRIMARY KEY (`idAlbum`),
-  -- INDEX `fk_albums_artistas1_idx` (`artistas_idartista` ASC) VISIBLE,
-  -- INDEX `fk_albums_favs_albums1_idx` (`favs_albums_idfav_album` ASC) VISIBLE,
   CONSTRAINT `fk_albums_artistas1`
     FOREIGN KEY (`artistas_idartista`)
     REFERENCES `artistas` (`idArtista`),
@@ -133,7 +123,6 @@ CREATE TABLE  `canciones` (
   `reproducciones` INT NULL,
   `albums_idAlbum` INT NOT NULL,
   PRIMARY KEY (`idcancion`),
-  -- INDEX `fk_canciones_albums1_idx` (`albums_idAlbum` ASC) VISIBLE,
   CONSTRAINT `fk_canciones_albums1`
     FOREIGN KEY (`albums_idAlbum`)
     REFERENCES `albums` (`idAlbum`)
@@ -147,9 +136,6 @@ CREATE TABLE  `items_playlist` (
   `playlists_idplaylist` INT NOT NULL,
   `usuarios_idusuario` INT NOT NULL,
   PRIMARY KEY (`iditem_lista`),
-  -- INDEX `fk_items_playlist_canciones1_idx` (`canciones_idcancion` ASC) VISIBLE,
-  -- INDEX `fk_items_playlist_playlists1_idx` (`playlists_idplaylist` ASC) VISIBLE,
-  -- INDEX `fk_items_playlist_usuarios1_idx` (`usuarios_idusuario` ASC) VISIBLE,
   CONSTRAINT `fk_items_playlist_canciones1`
     FOREIGN KEY (`canciones_idcancion`)
     REFERENCES `canciones` (`idcancion`),
@@ -166,8 +152,6 @@ CREATE TABLE  `follows_artistas` (
   `usuarios_idusuario` INT NOT NULL,
   `artistas_idartista` INT NOT NULL,
   PRIMARY KEY (`idfollow_artista`),
-  -- INDEX `fk_follows_artistas_usuarios1_idx` (`usuarios_idusuario` ASC) VISIBLE,
-  -- INDEX `fk_follows_artistas_artistas1_idx` (`artistas_idartista` ASC) VISIBLE,
   CONSTRAINT `fk_follows_artistas_usuarios1`
     FOREIGN KEY (`usuarios_idusuario`)
     REFERENCES `usuarios` (`idusuario`),
@@ -181,8 +165,6 @@ CREATE TABLE  `favs_canciones` (
   `usuarios_idusuario` INT NOT NULL,
   `canciones_idcancion` INT NOT NULL,
   PRIMARY KEY (`idfav_cancion`),
-  -- INDEX `fk_favs_canciones_usuarios1_idx` (`usuarios_idusuario` ASC) VISIBLE,
-  -- INDEX `fk_favs_canciones_canciones1_idx` (`canciones_idcancion` ASC) VISIBLE,
   CONSTRAINT `fk_favs_canciones_usuarios1`
     FOREIGN KEY (`usuarios_idusuario`)
     REFERENCES `usuarios` (`idusuario`),
@@ -196,8 +178,6 @@ CREATE TABLE  `artistas_relacionados` (
   `artistas_idArtista_original` INT NOT NULL,
   `artistas_idArtista_relacionado` INT NOT NULL,
   PRIMARY KEY (`idRelacion`),
-  -- INDEX `fk_artistas_relacionados_artistas1_idx` (`artistas_idArtista_original` ASC) VISIBLE,
-  -- INDEX `fk_artistas_relacionados_artistas2_idx` (`artistas_idArtista_relacionado` ASC) VISIBLE,
   CONSTRAINT `fk_artistas_relacionados_artistas1`
     FOREIGN KEY (`artistas_idArtista_original`)
     REFERENCES `artistas` (`idArtista`),
